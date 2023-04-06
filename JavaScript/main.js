@@ -3,6 +3,7 @@ $(document).ready(function () {
   var timeLeft = 10;
   var interval;
   var score = 0;
+  var highScore = 0;
   var randomNumberGenerator = function (size) {
     return Math.ceil(Math.random() * size);
   };
@@ -84,6 +85,21 @@ $(document).ready(function () {
       $("#user-input").val("");
       updateTimeLeft(+1);
       updateScore(+1);
+    }
+  };
+  var updateHighScore = function () {
+    if (score > highScore) { 
+      highScore = score;
+      $("#high-score").text(highScore); 
+    }
+  };  
+  var checkAnswer = function (userInput, answer) {
+    if (userInput === answer) {
+      renderNewQuestion();
+      $("#user-input").val("");
+      updateTimeLeft(+1);
+      updateScore(+1);
+      updateHighScore();
     }
   };
 });
